@@ -58,3 +58,21 @@
                         <label for="fullName" class="form-label">Full Name</label>
                     <input type="text" class="form-control" id="fullName" name="fullName" required>
                 </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div id="error-message" class="alert alert-danger d-none" role="alert"></div>
+                <button type="button" class="btn btn-primary w-100" onclick="validateForm()">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
