@@ -13,6 +13,7 @@
         {% for doctor in doctors %}
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item">
+                    <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" class="img-fluid mb-3">
                     <i class="fa fa-heartbeat text-primary fs-4"></i>
                     <h4 class="mb-3">{{ doctor.name }}</h4>
                     <p class="mb-2">{{ doctor.specialization }} - {{ doctor.description }}</p>
