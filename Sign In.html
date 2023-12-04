@@ -104,3 +104,15 @@
         var form = document.getElementById('signinForm');
         var email = form.elements['email'].value;
         var password = form.elements['password'].value;
+        if (!email || !password) {
+            document.getElementById('error-message').innerText = 'Please enter both email and password.';
+            document.getElementById('error-message').classList.remove('d-none');
+        } else {
+            // Additional validation logic can be added here
+            // If all is well, submit the form or perform further actions
+            form.submit();
+        }
+    }
+</script>
+</body>
+</html>
