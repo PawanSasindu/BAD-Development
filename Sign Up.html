@@ -82,3 +82,25 @@
     <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@easychannelling.com</p>
     
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function validateForm() {
+        // Simple validation example (you can enhance this based on your requirements)
+        var form = document.getElementById('signupForm');
+        var password = form.elements['password'].value;
+        var confirmPassword = form.elements['confirmPassword'].value;
+
+        if (password !== confirmPassword) {
+            document.getElementById('error-message').innerText = 'Password and Confirm Password do not match.';
+            document.getElementById('error-message').classList.remove('d-none');
+        } else {
+            // Additional validation logic can be added here
+            // If all is well, submit the form or perform further actions
+            form.submit();
+        }
+    }
+</script>
+</body>
+</html>
+
