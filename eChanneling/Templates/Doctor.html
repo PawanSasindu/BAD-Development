@@ -1,0 +1,27 @@
+{% extends "Doctor body.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Service Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <p class="d-inline-block border rounded-pill py-1 px-4">Doctors</p>
+            <h1>Meet Your Expert Care Partners</h1>
+        </div>
+
+        {% for doctor in doctors %}
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item">
+                    <i class="fa fa-heartbeat text-primary fs-4"></i>
+                    <h4 class="mb-3">{{ doctor.name }}</h4>
+                    <p class="mb-2">{{ doctor.specialization }} - {{ doctor.description }}</p>
+                    <p class="mb-2"><strong>Available Days:</strong> {{ doctor.available_days }}</p>
+                    <p><strong>Available Time:</strong> {{ doctor.available_time }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Service End -->
+{% endblock content %}
