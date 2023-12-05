@@ -30,9 +30,8 @@
             <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
             <a href="{% url 'doctor' %}" class="nav-item nav-link">Doctors</a>
             <a href="{% url 'other_services' %}" class="nav-item nav-link">Other Services</a>
-            <a href="Signin.html" class="nav-item nav-link">Sign In</a>
             <a href="{% url 'signup' %}" class="nav-item nav-link">Sign Up</a>
-            <a href="Appointment.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Appointment<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="{% url 'signin' %'}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Appointment<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </div>
 </nav>
