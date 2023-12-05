@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title>E CHANNELLING - Clinic Website Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" >
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" >
+</head>
+<style>
+    .form-container {
+        margin-bottom: 1in; /* Adjust the margin value as needed */
+    }
+    .form-container{
+        background-color: rgba(197, 221, 233, 0.473); /* Adjust the color as needed */
+    }
+</style>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light p-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="row gx-0 d-none d-lg-flex">
+    <div class="topbar-container">
+        <div class="topbar-row">
+            <div class="topbar-column text-start">
+                <div class="topbar-content">
+                <small>__A PLATFORM FOR A MEET YOUR DOCTOR </small>
+            </div>
+    </div>
+        <div class="topbar-column text-end">
+            <div class="topbar-content">
+            <small class="fa fa-phone-alt text-primary"></small>
+            <small>TEL:+9411 345 6789</small>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Topbar End -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+        <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h1 class="m-0 text-primary">EASY CHANNELLING</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+                <a href="{% url 'doctor' %}" class="nav-item nav-link">Doctor</a>
+                <a href="{% url 'other_services' %}" class="nav-item nav-link">Other Services</a>
+                <a href="contact.html" class="nav-item nav-link">Sign In</a>
+                <a href="{% url 'signup' %}" class="nav-item nav-link">Sign Up</a>
+                <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Appointment<i class="fa fa-arrow-right ms-3"></i></a>
+            </div>
+            
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <div class="container mt-5 form-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Sign In</h2>
+                <form method="post" action="{% url 'signin' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="idNumber" class="form-label">ID Number</label>
+                        <input type="text" class="form-control" id="idNumber" name="idNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+
+                    <div id="error-message" class="alert alert-danger d-none" role="alert">
+                        {{ messages }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light p-5 text-center">
+        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Easy Channelling,Colombo 07</p>
+        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+9411 345 6789</p>
+        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@easychannelling.com</p>
+    </div>
+    <!-- Footer End -->
+
+    <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</script>
+    </body>
+
+    </html>

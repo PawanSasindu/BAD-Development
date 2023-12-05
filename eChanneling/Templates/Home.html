@@ -46,8 +46,8 @@
                 <a href="{% url 'doctor' %}" class="nav-item nav-link">Doctors</a>
                 <a href="{% url 'other_services' %}" class="nav-item nav-link">Other Services</a>
                 <a href="Signin.html" class="nav-item nav-link">Sign In</a>
-                <a href="Signup.html" class="nav-item nav-link">Sign Up</a>
-                <a href="Appointment.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Appointment<i class="fa fa-arrow-right ms-3"></i></a>
+                <a href="{% url 'signup' %}" class="nav-item nav-link">Sign Up</a>
+                <a href="{% url 'signin'%}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Appointment<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
         </div>
     </nav>
@@ -55,6 +55,7 @@
     <div class="container-fluid header" style="background-color: lightblue; padding: 5rem; text-align: center; color: white;">
         <h1 class="display-4 mb-5">Effortless Health Access, Seamless Appointments, Your Easy Channel to Wellness</h1>
     </div>
+
 
     <div class="container py-5">
         <div class="row g-5">
