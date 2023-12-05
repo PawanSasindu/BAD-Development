@@ -3,6 +3,7 @@
 
 {% block content %}
 <!-- Service Start -->
+
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
@@ -10,19 +11,38 @@
             <h1>Meet Your Expert Care Partners</h1>
         </div>
 
-        {% for doctor in doctors %}
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item">
-                    <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" class="img-fluid mb-3">
-                    <i class="fa fa-heartbeat text-primary fs-4"></i>
-                    <h4 class="mb-3">{{ doctor.name }}</h4>
-                    <p class="mb-2">{{ doctor.specialization }} - {{ doctor.description }}</p>
-                    <p class="mb-2"><strong>Available Days:</strong> {{ doctor.available_days }}</p>
-                    <p><strong>Available Time:</strong> {{ doctor.available_time }}</p>
+        <div class="row g-4">
+            {% for doctor in database %}
+                <div class="col-lg-3 col-md-6 mb-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item text-center profile-card">
+                        <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" class="img-fluid mb-3">
+                        <i class="fa fa-heartbeat text-primary fs-4"></i>
+                        <h4 class="mb-3">{{ doctor.name }}</h4>
+                        <p class="mb-2">{{ doctor.specialization }} - {{ doctor.description }}</p>
+                        <p class="mb-2"><strong>Available Days:</strong> {{ doctor.available_days }}</p>
+                        <p><strong>Available Time:</strong> {{ doctor.available_time }}</p>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                    </div>
+                    <div class="row g-4">
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 <!-- Service End -->
+<!--profile cards styles start-->
+<style>
+    .profile-card {
+        width: 2in;
+        height: 6in;
+        border: 10px solid lightblue;
+        padding: 5px; /* Adjust padding as needed */
+        margin: auto; /* Center the profile card within the column */
+    }
+</style>
+<!--profile cards styles end-->
+
 {% endblock content %}
