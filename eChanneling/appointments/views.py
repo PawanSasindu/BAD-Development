@@ -8,10 +8,15 @@ from django.contrib import messages
 
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from .models import UserProfile
+
 
 from django.shortcuts import render, redirect
-from .models import Doctor, Appointment
+from django.http import HttpResponse
+from .forms import AppointmentForm 
+from .models import Doctor
 
 # Create your views here.
 def home(request):
@@ -62,14 +67,16 @@ def signup(request):
 def signin(request):
     if request.method == 'POST':
         id_number = request.POST['idNumber']
-        password = request.POST['password']
 
-        # Authenticate the user using the ID number and password
-        user = authenticate(request, id_number=id_number, password=password)
+        # Check if a user with the given id_number exists in UserProfile
+        try:
+            user_profile = UserProfile.objects.get(id_number=id_number)
+        except UserProfile.DoesNotExist:
+            user_profile = None
 
-        if user is not None:
+        if user_profile is not None:
             # If the user is valid, log in the user and redirect to the appointment page
-            login(request, user)
+            login(request, user_profile.user)
             return redirect('appointment')
         else:
             # If the user is not valid, display an error message
@@ -82,30 +89,34 @@ def signin(request):
 # appoinment creating
 def appointment(request):
     if request.method == 'POST':
-        customer_name = request.POST['customer_name']
-        phone_number = request.POST['phone_number']
-        id_number = request.POST['id_number']
-        doctor_id = request.POST['doctor']
-        date = request.POST['date']
-        time = request.POST['time']
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            # Extract data from the form
+            customer_name = form.cleaned_data['customer_name']
+            phone_number = form.cleaned_data['phone_number']
+            id_number = form.cleaned_data['id_number']
+            doctor = form.cleaned_data['doctor']
+            date = form.cleaned_data['date']
+            time = form.cleaned_data['time']
 
-        doctor = Doctor.objects.get(pk=doctor_id)
+            # Create an Appointment instance and save it
+            appointment = Appointment(
+                customer_name=customer_name,
+                phone_number=phone_number,
+                id_number=id_number,
+                doctor=doctor,
+                date=date,
+                time=time
+            )
+            appointment.save()
 
-        appointment = Appointment(
-            customer_name=customer_name,
-            phone_number=phone_number,
-            id_number=id_number,
-            doctor=doctor,
-            date=date,
-            time=time
-        )
-        appointment.save()
+            # Generate and display the report in the browser
+            report_content = appointment.generate_report()
+            response = HttpResponse(report_content, content_type='text/plain')
+            response['Content-Disposition'] = 'inline; filename=appointment_report.txt'
+            return response  # This is the correct return statement
 
-        # Generate and download the report
-        report_content = appointment.generate_report()
-        response = HttpResponse(report_content, content_type='text/plain')
-        response['Content-Disposition'] = 'attachment; filename=appointment_report.txt'
-        return response
-
+    # If it's a GET request or form is not valid, create a form and render the template
+    form = AppointmentForm()
     doctors = Doctor.objects.all()
-    return render(request, 'appointment.html', {'doctors': doctors})
+    return render(request, 'appointment.html', {'form': form, 'doctors': doctors})

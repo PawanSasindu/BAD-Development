@@ -41,5 +41,13 @@ class Appointment(models.Model):
     date = models.DateField()
     time = models.TimeField()
 
-    def __str__(self):
-        return f"{self.customer_name}'s Appointment with {self.doctor.name} on {self.date} at {self.time}"
+def generate_report(self):
+        report_content = f"Appointment Report:\n\n"
+        report_content += f"Customer Name: {self.customer_name}\n"
+        report_content += f"Phone Number: {self.phone_number}\n"
+        report_content += f"ID Number: {self.id_number}\n"
+        report_content += f"Doctor: {self.doctor.name}\n"
+        report_content += f"Date: {self.date}\n"
+        report_content += f"Time: {self.time}\n"
+
+        return report_content

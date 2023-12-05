@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
     <!-- Head content here -->
     <meta charset="utf-8">
     <title>E CHANNELLING - Clinic Website Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" >
-    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -64,24 +64,35 @@
                 <div class="h-100 items-center p-5">
                     <form method="post" action="{% url 'appointment' %}">
                         {% csrf_token %}
-                        <!-- Other form fields here -->
-
-                        <div class="col-12 col-sm-6">
-                            <select name="doctor" class="form-select border-0" style="height: 55px;">
-                                <option selected>Choose Doctor</option>
-                                {% for doctor in doctors %}
-                                <option value="{{ doctor.id }}">{{ doctor.name }}</option>
-                                {% endfor %}
-                            </select>
+                        <div class="mb-3">
+                            <label for="customer_name" class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" id="customer_name" name="customer_name" required>
                         </div>
-
-                        <div class="col-12 col-sm-6 align-self-end">
-                            <!-- Date input field here -->
+                        <div class="mb-3">
+                            <label for="phone_number" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" required>
                         </div>
-                        <div class="col-12 col-sm-6">
-                            <!-- Time input field here -->
+                        <div class="mb-3">
+                            <label for="id_number" class="form-label">ID Number</label>
+                            <input type="text" class="form-control" id="id_number" name="id_number" required>
                         </div>
+<!-- Doctor dropdown -->
+<div class="mb-3">
+    <label for="doctor" class="form-label">Doctor</label>
+    <input type="text" class="form-control" id="doctor" name="doctor" required>
+</div>
+<!-- Date input field -->
+<div class="mb-3">
+    <label for="date" class="form-label">Date</label>
+    <input type="date" class="form-control" id="date" name="date" required>
+</div>
 
+<!-- Time input field -->
+<div class="mb-3">
+    <label for="time" class="form-label">Time</label>
+    <input type="time" class="form-control" id="time" name="time" required>
+</div>
+                    
                         <div class="col-12">
                             <button class="btn btn-primary w-100 py-3" type="submit">Book Appointment</button>
                         </div>
