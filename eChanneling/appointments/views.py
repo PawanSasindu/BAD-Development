@@ -10,6 +10,9 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+from django.shortcuts import render, redirect
+from .models import Doctor, Appointment
+
 # Create your views here.
 def home(request):
     return render(request, 'Home.html')
@@ -76,4 +79,33 @@ def signin(request):
     return render(request, 'signin.html')
 
 
+# appoinment creating
+def appointment(request):
+    if request.method == 'POST':
+        customer_name = request.POST['customer_name']
+        phone_number = request.POST['phone_number']
+        id_number = request.POST['id_number']
+        doctor_id = request.POST['doctor']
+        date = request.POST['date']
+        time = request.POST['time']
 
+        doctor = Doctor.objects.get(pk=doctor_id)
+
+        appointment = Appointment(
+            customer_name=customer_name,
+            phone_number=phone_number,
+            id_number=id_number,
+            doctor=doctor,
+            date=date,
+            time=time
+        )
+        appointment.save()
+
+        # Generate and download the report
+        report_content = appointment.generate_report()
+        response = HttpResponse(report_content, content_type='text/plain')
+        response['Content-Disposition'] = 'attachment; filename=appointment_report.txt'
+        return response
+
+    doctors = Doctor.objects.all()
+    return render(request, 'appointment.html', {'doctors': doctors})

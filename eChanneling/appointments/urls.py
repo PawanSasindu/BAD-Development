@@ -3,6 +3,7 @@ from . import views
 # for signup page
 from .views import signup
 from .views import signin
+from . views import appointment
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -10,4 +11,5 @@ urlpatterns = [
     path('doctor/', views.doctor, name='doctor'),
     path('signup/', signup, name='signup'),
     path('signin/', signin, name='signin'),
+    path('appointment/', views.appointment, name='appointment'),
 ]
